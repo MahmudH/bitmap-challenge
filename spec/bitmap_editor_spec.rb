@@ -4,7 +4,7 @@ RSpec.describe BitmapEditor do
   matrices_output = [
       [0,0,0,0,0],
       [0,0,0,0,0],
-      [0,0,0,0,0],
+      [0,0,0,0,0]
   ]
   let(:matrix){ double(:matrix, matrices: matrices_output) }
   subject(:bitmap_editor) { described_class.new(matrix.matrices) }
@@ -23,6 +23,12 @@ RSpec.describe BitmapEditor do
     bitmap_editor.place_color(1, 1, 'A')
 
     expect(bitmap_editor.matrix).to eq(expected)
+  end
+
+  it 'should reset the matrix to all white' do
+    bitmap_editor.place_color(1, 1, 'A')
+    bitmap_editor.reset
+    expect(bitmap_editor.matrix).to eql(matrices_output)
   end
 
 end
